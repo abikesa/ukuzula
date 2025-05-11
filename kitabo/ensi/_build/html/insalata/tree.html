@@ -550,6 +550,52 @@ document.write(`
 <img alt="../_images/3dd7776db88588efe8aac0f02a6a8f7f84269bd82ffc9129568767b7fc590641.png" src="../_images/3dd7776db88588efe8aac0f02a6a8f7f84269bd82ffc9129568767b7fc590641.png" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">LineString</span>
+
+<span class="c1"># Define coordinates and labels again for plotting without geopandas</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Ukuvula: Saitama&quot;</span><span class="p">,</span> <span class="mf">139.6489</span><span class="p">,</span> <span class="mf">35.8617</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Ukuvula: Shinjuku&quot;</span><span class="p">,</span> <span class="mf">139.7036</span><span class="p">,</span> <span class="mf">35.6938</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Ukuzula: Lima&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">77.0428</span><span class="p">,</span> <span class="o">-</span><span class="mf">12.0464</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Ukuzula: Buenos Aires&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">58.4173</span><span class="p">,</span> <span class="o">-</span><span class="mf">34.6037</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Ukusoma: Anchorage&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">149.9003</span><span class="p">,</span> <span class="mf">61.2181</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Ukubona: Los Angeles&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">118.2437</span><span class="p">,</span> <span class="mf">34.0522</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Ukuvela: NYC&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0094</span><span class="p">,</span> <span class="mf">40.7163</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Extract latitudes and longitudes</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">locations</span><span class="p">)</span>
+
+<span class="c1"># Plot the map background</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;whitesmoke&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="s1">&#39;ko-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Annotate each point</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">lon</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">lat</span> <span class="o">+</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkred&#39;</span><span class="p">)</span>
+
+<span class="c1"># Axis formatting</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Nobu&#39;s Life Journey Mapped onto the Ukubona Cycle&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;images/nobu-origins.jpeg&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3d5b95c6ad0954f488e9c28d90cb1e2ceb4560b5d40dbc362a35b4d526fb2937.png" src="../_images/3d5b95c6ad0954f488e9c28d90cb1e2ceb4560b5d40dbc362a35b4d526fb2937.png" />
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
