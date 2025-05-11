@@ -9,6 +9,7 @@
   <link rel="icon" href="../favicon.ico" type="image/x-icon">
   <script src="../js/toggle-darkmode.js" defer></script>
   <script src="../js/wiki-controls.js" defer></script>
+  <script defer src="../js/lightbox.js"></script>
 </head>
 <body>
   <header>
@@ -43,7 +44,7 @@
 
       <!-- Infobox -->
       <aside id="infobox">
-        <img src="../images/marx_vs_ukubona.svg" alt="Marx vs Ukubona Diagram" style="width:100%; border-radius:8px; margin-bottom:8px;">
+        <img src="https://raw.githubusercontent.com/abikesa/tidjane-thiam/refs/heads/main/tidjane-thiam.jpeg" alt="Marx vs Ukubona Diagram" style="width:100%; border-radius:8px; margin-bottom:8px;">
         <table class="infobox">
           <caption>Faustian Finance</caption>
           <tr><td><strong>Discipline:</strong> Financial Ethics, Economic Philosophy</td></tr>
@@ -210,5 +211,9 @@
   <footer>
     <p>Last updated: May 2025 | Powered by Ukubona Wiki</p>
   </footer>
+  <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center;">
+    <span id="lightbox-close" style="position:absolute; top:30px; right:45px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;">×</span>
+    <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; box-shadow:0 0 20px rgba(255,255,255,0.3); border-radius:10px;"/>
+  </div>
 </body>
 </html>
