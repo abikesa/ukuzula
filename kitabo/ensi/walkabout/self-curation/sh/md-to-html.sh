@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Update this one line only
-FILENAME="signal-cartography"
+FILENAME="identity"
 
 # Auto-generate paths
 INPUT="../md/${FILENAME}.md"
