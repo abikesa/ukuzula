@@ -28,7 +28,7 @@ def remote_exists(remote):
 @click.command()
 @click.option('--commit-message', prompt="📜 Enter your commit message", help="The Git commit message.")
 @click.option('--git-remote', prompt="🛰️ Enter the Git remote to push to", default="origin", show_default=True, help="Git remote name.")
-@click.option('--ghp-remote', prompt="🚀 Enter the remote for ghp-import", default="origin", show_default=True, help="Remote for ghp-import deployment.")
+@click.option('--ghp-remote', default="origin", show_default=True, help="Remote for ghp-import deployment.")
 def main(commit_message, git_remote, ghp_remote):
     os.chdir(Path(__file__).resolve().parents[1])
 
@@ -83,7 +83,8 @@ def main(commit_message, git_remote, ghp_remote):
         "pdfs", "figures", "media", "testbin", "nis", "myhtml", "dedication", "python", "ai",
         "r", "stata", "bash", "xml", "data", "aperitivo", "antipasto", "primo", "secondo",
         "contorno", "insalata", "formaggio-e-frutta", "dolce", "caffe", "digestivo", "ukubona",
-        "the-rug", "spjd-rebuild", "spjd-beta", "ukuvula", "tokens"
+        "the-rug", "spjd-rebuild", "spjd-beta", "ukuvula", "tokens", "ukuvela", "index", "mywiki",
+        "einstein", "eliso", "wilde-e", "list"
     ]
     for d in extras:
         if os.path.isdir(d):
@@ -114,7 +115,13 @@ def main(commit_message, git_remote, ghp_remote):
 
     if remote_branch_exists:
         click.secho("🔄 Fetching remote changes...", fg="cyan")
-        run(f"git fetch {git_remote}")
+        try:
+            run(f"git fetch {git_remote}")
+        except subprocess.CalledProcessError:
+            click.secho("🧹 Detected fetch error. Pruning remote refs and retrying...", fg="yellow")
+            run(f"git remote prune {git_remote}")
+            run(f"git fetch {git_remote}")
+
         click.secho("🔀 Rebasing local changes...", fg="cyan")
         try:
             run(f"git rebase {git_remote}/{git_branch}")
@@ -136,7 +143,11 @@ def main(commit_message, git_remote, ghp_remote):
         click.secho("🆕 Remote 'gh-pages' branch will be created by ghp-import.", fg="yellow")
 
     click.secho("🚀 Deploying with ghp-import...", fg="cyan")
-    run(f"ghp-import -n -p -f -r {ghp_remote} _build/html")
+
+    if ghp_remote == "gh-pages":
+        ghp_remote = "origin"
+
+    run(f"ghp-import -n -p -f -b gh-pages -r {ghp_remote} _build/html")
 
 if __name__ == "__main__":
     main()
