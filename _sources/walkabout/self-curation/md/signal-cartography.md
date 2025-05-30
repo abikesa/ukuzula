@@ -57,3 +57,4 @@ That’s the difference between *Noise: A Flaw in Human Judgment* and **Noise: A
 The first is a manual for judges.
 
 The second is a gospel for migrants.
+# flick 20250530010904-Q3SE
