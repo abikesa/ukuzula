@@ -1,8 +1,10 @@
 
 # Ukusoma 📚🌒🧠
 
-> *“What the eye sees is different from what the mind reads. Ukusoma is not sight. It is the slow translation of signals into wisdom.”*  
+> *“What the eye sees is different from what the mind reads. [Ukusoma](https://www.ahlloyd.com/2024/09/sean-diddy-combs-and-the-limits-of-hedonism.html) is not sight. It is the slow translation of signals into wisdom.”*  
 > — Anonymous
+
+![](./kitabo/ensi/figures/tidjane-thiam.jpeg)
 
 Welcome to the **Ukusoma** prototype.  
 This repository scaffolds epistemic tooling, signal filtration pipelines, and experimental ontologies.  
@@ -73,7 +75,7 @@ $$
 - [Launch Dashboard](https://example.com/404)  
 - [Token Dispenser](./token.cff)  
 - [Index (Decoy)](./index.html)  
-- [Start Reading](./index.html) 🧭  
+- [Start Reading](~/index.html) 🧭  
 - [Entropy Poem](./poem.md) ✍️
 
 ---
@@ -183,3 +185,6 @@ shall inherit the fire.
 find decoy -name "*.py" | head -n 20
 ```
 
+
+# flick 20250529141257-hmbP
+# flick 20250529160833-dnUR

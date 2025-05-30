@@ -4,12 +4,20 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Academic Authorship and Equity - Ukubona Wiki</title>
-    <link href="../style/article.css" rel="stylesheet"/>
-    <link href="../style/settings-bar.css" rel="stylesheet"/>
-    <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
-    <script defer="" src="../js/toggle-darkmode.js"></script>
-    <script defer="" src="../js/wiki-controls.js"></script>
-    <script defer src="../js/lightbox.js"></script>
+    <link href="https://abikesa.github.io/css/article.css" rel="stylesheet">
+    <link href="https://abikesa.github.io/css/settings-bar.css" rel="stylesheet">
+    <!-- Favicon for light mode -->
+    <link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" type="image/x-icon" media="(prefers-color-scheme: light)">
+    <!-- Favicon for dark mode -->
+    <link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)">
+    <!-- Preload Logo Assets -->
+    <link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-light.png" as="image">
+    <link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-dark.png" as="image">
+    <!-- Scripts -->
+    <script defer src="https://abikesa.github.io/js/toggle-darkmode.js"></script>
+    <script defer src="https://abikesa.github.io/js/wiki-controls.js"></script>
+    <script defer src="https://abikesa.github.io/js/lightbox.js"></script>
+
 </head>
 <body>
     <header>
@@ -41,7 +49,7 @@
         <main id="content">
             <h1>Academic Authorship and Equity</h1>
             <aside id="infobox">
-                <img alt="Academic Journal" src="../images/tidjane-thiam.jpeg" style="width:100%; border-radius:8px; margin-bottom:8px;"/>
+                <img alt="Academic Journal" src="https://github.com/abikesa/tidjane-thiam/blob/main/tidjane-thiam.jpeg?raw=true" style="width:100%; border-radius:8px; margin-bottom:8px;"/>
                 <table class="infobox">
                     <caption>Authorship in Scholarly Publishing</caption>
                     <tr><td><strong>Subject:</strong> Dr. X</td></tr>
@@ -147,15 +155,50 @@
             </aside>
         </main>
         <aside id="settings-bar">
-            <!-- Settings bar remains unchanged -->
+            <div class="settings-section">Appearance</div>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input id="small-text" name="text-size" type="radio"/>
+                    <label for="small-text">Small</label>
+                </div>
+                <div class="radio-option">
+                    <input checked="" id="normal-text" name="text-size" type="radio"/>
+                    <label for="normal-text">Standard</label>
+                </div>
+                <div class="radio-option">
+                    <input id="large-text" name="text-size" type="radio"/>
+                    <label for="large-text">Large</label>
+                </div>
+            </div>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input checked="" id="standard-width" name="width-setting" type="radio"/>
+                    <label for="standard-width">Standard</label>
+                </div>
+                <div class="radio-option">
+                    <input id="wide-width" name="width-setting" type="radio"/>
+                    <label for="wide-width">Wide</label>
+                </div>
+            </div>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input checked="" id="light-mode" name="theme-setting" type="radio"/>
+                    <label for="light-mode">Light</label>
+                </div>
+                <div class="radio-option">
+                    <input id="dark-mode" name="theme-setting" type="radio"/>
+                    <label for="dark-mode">Dark</label>
+                </div>
+            </div>
         </aside>
     </div>
     <footer>
         <p>Last updated: May 2025 | Powered by Ukubona Wiki</p>
     </footer>
-    <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center;">
-        <span id="lightbox-close">×</span>
-        <img id="lightbox-img" src=""/>
-    </div>
+<!-- Update lightbox -->
+<div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center;">
+    <span id="lightbox-close" style="position:absolute; top:30px; right:45px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer;">×</span>
+    <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; box-shadow:0 0 20px rgba(255,255,255,0.3); border-radius:10px;"/>
+</div>
 </body>
 </html>

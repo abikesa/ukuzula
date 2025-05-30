@@ -1,13 +1,26 @@
-<!DOCTYPE html>
+
+<!DOCTYPE html>    
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ukubona</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<!-- Fallback favicon (used if browser doesn't support media queries) -->
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" type="image/x-icon" />
+<!-- Favicon for light mode -->
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" type="image/x-icon" media="(prefers-color-scheme: light)" />
+<!-- Favicon for dark mode -->
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)" />
+  <!-- Preload Logo Assets -->
+  <link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-light.png" as="image" />
+  <link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-dark.png" as="image" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    .logo-center img {
+      background-color: transparent;
+    }
+    
     :root {
       --bg-light: #ffffff;
       --bg-dark: #000000;
@@ -33,6 +46,14 @@
       font-family: 'Inter', system-ui, sans-serif;
     }
 
+    html[data-theme='light'] .menu-icon div {
+      background-color: #000;
+    }
+
+    html[data-theme='dark'] .menu-icon div {
+      background-color: #fff;
+    }
+
     body {
       display: flex;
       align-items: center;
@@ -46,18 +67,43 @@
       to { opacity: 1; }
     }
 
-    .logo-center img {
-      width: 220px;
-      height: 220px;
-      animation: spin 60s linear infinite;
-      object-fit: contain;
-      image-rendering: auto;
-      filter: drop-shadow(0 0 0 transparent);
+    .logo-center {
+      width: 400px;
+      height: 400px;
     }
+    
+    .logo-center img {
+      width: 100%;
+      height: 100%;
+      transform-origin: center center;
+      object-fit: contain;
+      transform: scale(1.0);
+    }
+    
 
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from { transform: scale(1) rotate(0deg); }
+      to   { transform: scale(1) rotate(360deg); }
+    }
+
+    @keyframes spin-light {
+      from { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+      to   { transform: translate(0px, 0px) scale(1) rotate(360deg); }
+    }
+
+    #logo {
+     animation: spin 60s linear infinite;
+     transition: opacity 0.4s ease-in;
+     opacity: 0;
+    }
+
+    body.loaded #logo {
+      opacity: 1;
+    }
+
+
+    #logo.light-mode-fix {
+      animation: spin-light 60s linear infinite !important;
     }
 
     .top-left, .top-right {
@@ -90,7 +136,6 @@
     }
 
     .menu-icon div {
-      background-color: currentColor;
       width: 8px;
       height: 8px;
       border-radius: 1px;
@@ -140,7 +185,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .app-grid .icon-box {
+    .icon-box {
       font-size: 1.4rem;
       width: 48px;
       height: 48px;
@@ -153,19 +198,24 @@
 </head>
 <body>
   <div class="top-left">
-    <div class="menu-icon" id="gridToggle">
+    <div class="menu-icon" id="gridToggle" role="button" aria-label="Open navigation menu" tabindex="0">
       <div></div><div></div><div></div>
       <div></div><div></div><div></div>
       <div></div><div></div><div></div>
     </div>
-  </div>
-
+  </div> <!-- <- This was missing -->
+  
   <div class="top-right">
     <button id="toggle-theme">🌞 / 🌙</button>
   </div>
 
   <div class="logo-center">
-    <img src="./images/ukubona-light-fixed.png" alt="Ukubona Logo" id="logo">
+<img
+  src="https://abikesa.github.io/logos/assets/ukubona-light.png"
+  alt="Ukubona Logo"
+  id="logo"
+  loading="eager"
+/>
   </div>
 
   <div class="app-grid" id="gridMenu"></div>
@@ -175,17 +225,22 @@
     const toggleBtn = document.getElementById('toggle-theme');
     const logo = document.getElementById('logo');
 
-    const LIGHT_LOGO = './images/ukubona-light-fixed.png';
-    const DARK_LOGO = './images/ukubona-dark-fixed.png';
+    const LIGHT_LOGO = 'https://abikesa.github.io/logos/assets/ukubona-light.png';
+    const DARK_LOGO  = 'https://abikesa.github.io/logos/assets/ukubona-dark.png';
 
     function setTheme(theme) {
       html.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
       logo.src = theme === 'dark' ? DARK_LOGO : LIGHT_LOGO;
       toggleBtn.textContent = theme === 'dark' ? '🌙' : '🌞';
+      if (theme === 'light') {
+        logo.classList.add('light-mode-fix');
+      } else {
+        logo.classList.remove('light-mode-fix');
+      }
     }
 
-    const storedTheme = localStorage.getItem('theme') || 'light';
+    const storedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(storedTheme);
 
     toggleBtn.addEventListener('click', () => {
@@ -200,11 +255,23 @@
       menu.style.display = menu.style.display === 'grid' ? 'none' : 'grid';
     });
 
+    toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
+    });     
+        
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !toggle.contains(e.target)) {
         menu.style.display = 'none';
       }
     });
+
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
 
     const links = [
       { name: 'Mythology', url: 'articles/mythology.html', icon: '🏺' },

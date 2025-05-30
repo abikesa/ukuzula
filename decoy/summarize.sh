@@ -17,7 +17,7 @@ for arg in "$@"; do
         --md) OUTPUT_MD=true ;;
         --raw) FILTER_EXCLUDES=false ;;
         --json) OUTPUT_JSON=true ;;
-        --xml) OUTPUT_XML=true ;;
+        --xml) OUTPUT_XML=true ;;      
         --haiku) OUTPUT_HAIKU=true ;;
         *) TARGET_DIR=$arg ;;
     esac
