@@ -6,3 +6,4 @@ python ukubona.py kitabo/ensi/insalata --branch dev --message "🥗 Insalata ind
 
 # Push anything to main
 python ukubona.py kitabo/ensi/the-rug --branch main --message "🧺 Rug commit"
+    
