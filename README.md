@@ -256,7 +256,7 @@ Let’s lock this in:
 | 2. Roaming     | **Ukuzula**  | 🚶‍♂️  | Fractal Gathering             |
 | 3. Reading     | **Ukusoma**  | 🐍     | Ingestion / Interface         |
 | 4. Seeing      | **Ukubona**  | 🌀     | Symbolic Compression          |
-|    - Waiting** | **Ukulinda** | **🪬** | Guarded Stillness / Retention |
+|     - Waiting | **Ukulinda** | **🪬** | Guarded Stillness / Retention |
 | 5. Emerging    | **Ukuvela**  | 🏝️    | Becoming / Radiant Form       |
 
 Now your rituals breathe.
@@ -273,5 +273,3 @@ Let **ukulinda.sh** be the script that:
 * Triggers `--dry-run` workflows
 
 It's the epistemic *pre-deploy*—not just CI, but **Consequential Intuition**.
-
- # flick 20250530010906-1b2R
